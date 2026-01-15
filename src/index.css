@@ -1,0 +1,31 @@
+@import "tailwindcss";
+@theme {
+  --animate-moon: moon 0.5s ease-in;
+  --animate-sun: sun 0.5s ease-in;
+  @keyframes moon {
+    0% {
+      opacity: 0;
+      translate: 100%;
+    }
+    70% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+      translate: 0%;
+    }
+  }
+  @keyframes sun {
+    0% {
+      opacity: 0;
+      translate: -100%;
+    }
+    70% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+      translate: 0%;
+    }
+  }
+}

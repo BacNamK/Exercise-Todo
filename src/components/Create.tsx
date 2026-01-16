@@ -55,18 +55,22 @@ const Create = ({ opens, setOpen, sign, setSign }: props) => {
   return (
     <div
       className={`${
-        opens ? "xl:w-[50%] h-[60%] md:w-[70%]  max-lg:h-[63%]" : "w-0 h-0"
+        opens
+          ? "xl:w-[55%] xl:h-[60%] md:w-[80%]  max-lg:h-[63%] lg:h-[70%]"
+          : "w-0 h-0"
       } absolute z-50 top-20  bg-white/30 rounded-xl duration-300 shadow-2xl max-md:w-[90%]`}
     >
       <button
-        className={`absolute right-4 top-2  ${opens ? "" : "hidden"}`}
+        className={`absolute right-4 top-2 shadow rounded-xl w-10 cursor-pointer ${
+          opens ? "" : "hidden"
+        }`}
         onClick={() => setOpen(!opens)}
       >
         X
       </button>
-      <div className="w-full grid mt-15 justify-items-center">
+      <div className="w-full grid mt-15 justify-items-center text-black">
         <input
-          className={`w-[90%] h-10 bg-gray-100  pl-2 rounded-xl outline-none ${
+          className={`w-[90%] h-10 bg-gray-100  pl-2 rounded-xl outline-none  ${
             opens ? "w-[90%]" : "hidden"
           }`}
           value={name}
@@ -112,7 +116,7 @@ const Create = ({ opens, setOpen, sign, setSign }: props) => {
           <div className="w-full content-center flex justify-center max-md:mt-5">
             <button
               onClick={() => CreateTask()}
-              className={`items-center bg-green-300 p-1 h-12 w-30 justify-items-center shadow rounded-[5px] ${
+              className={`items-center bg-green-500 p-1 h-12 w-30 justify-items-center shadow rounded-[5px] ${
                 opens ? "" : "hidden"
               }`}
             >

@@ -36,11 +36,12 @@ const Todo = ({ light }: props) => {
   const getLocal = () => {
     const todoString = localStorage.getItem("task");
     const todo = todoString ? JSON.parse(todoString) : [];
-    setTodo([...todo].reverse());
-    setAllTodo(todo);
+    setTodo([...todo].slice().reverse());
+    setAllTodo([...todo]);
   };
 
   useEffect(() => {
+    document.title = "TODO";
     getLocal();
   }, [sign]);
 
@@ -48,12 +49,15 @@ const Todo = ({ light }: props) => {
     const v = value.toLowerCase();
     const clone = allTodo;
     const fil = clone.filter((t) => t.name.toLowerCase().includes(v));
-    setTodo(fil);
+    setTodo([...fil].reverse());
   };
 
   useEffect(() => {
-    if (!value) getLocal();
-    searchTask();
+    if (value) {
+      searchTask();
+    } else {
+      getLocal();
+    }
   }, [value]);
 
   const pageTodo = useMemo(() => {
@@ -136,7 +140,7 @@ const Todo = ({ light }: props) => {
           }`}
         >
           <div className="w-[50%] bg-white shadow h-10 rounded-xl  pl-2 flex relative">
-            <form onSubmit={searchTask} className="content-center w-[90%]">
+            <form onFocus={searchTask} className="content-center w-[90%]">
               <input
                 onChange={(e) => setValue(e.target.value)}
                 className="w-full outline-none h-full text-black"
@@ -260,12 +264,12 @@ const Todo = ({ light }: props) => {
             </div>
           )}
         </div>
-        <div className="flex justify-end w-full max-sm:absolute max-sm:bottom-10 max-sm:right-5  ">
+        <div className="flex justify-end w-full max-sm:absolute max-sm:bottom-10 max-sm:right-5 md:mt-10  ">
           <div className={`w-auto ${opens ? "hidden" : ""}`}>
             {Array.from({ length: totalPage }).map((_, i) => (
               <button
                 className={`shadow w-6 rounded-[3px] mr-2  ${
-                  page === i + 1 ? " outline-1" : ""
+                  page === i + 1 ? " bg-gray-400" : ""
                 } ${light ? "" : "outline-gray-50"}`}
                 key={i}
                 onClick={() => setPage(i + 1)}
